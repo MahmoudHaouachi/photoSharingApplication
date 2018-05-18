@@ -19,7 +19,7 @@ namespace PhotoSharingApp.Models
             p.Title = "Test Photo";
             p.Description = "This is a test";
             p.Owner = "NaokiSato";
-            p.PhotoFile = getFileBytes("\\Images\\");
+            p.PhotoFile = getFileBytes("C:\\Users\\H.Mahmoud\\Desktop\\2a info\\MiniProjetC#\\photoSharingApplication\\PhotoSharingApp\\Images\\me.jpg");
             p.CreatedDate = DateTime.Now;
             p.ImageMimeType = "image/jpeg";
             photo.Add(p);

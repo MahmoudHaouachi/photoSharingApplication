@@ -38,3 +38,5 @@ C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSha
 C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSharingApp\obj\Debug\PhotoSharingApp.csprojResolveAssemblyReference.cache
 C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSharingApp\obj\Debug\PhotoSharingApp.dll
 C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSharingApp\obj\Debug\PhotoSharingApp.pdb
+C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSharingApp\bin\EntityFramework.dll
+C:\Users\H.Mahmoud\Desktop\2a info\MiniProjetC#\photoSharingApplication\PhotoSharingApp\bin\EntityFramework.xml
