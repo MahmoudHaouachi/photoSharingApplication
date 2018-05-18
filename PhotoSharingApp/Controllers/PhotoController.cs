@@ -13,13 +13,13 @@ namespace PhotoSharingApp.Controllers
         // GET: Photo
         public ActionResult Index()
         {
-            
+
             return View("Index");
             //context.Photos.First<Photo>()
             // context.Photos.ToList()
         }
 
-        public ActionResult Display (int id)
+        public ActionResult Display(int id)
         {
             List<Photo> photos = context.Photos.ToList();
             var p = photos.Find(photo => photo.PhotoID == id);
@@ -28,5 +28,64 @@ namespace PhotoSharingApp.Controllers
             else
                 return HttpNotFound();
         }
+
+        public ActionResult Create()
+        {
+            Photo photo = new Photo();
+            photo.CreatedDate = DateTime.Now;
+            return View("Create", photo);
+        }
+        [HttpPost]
+        public ActionResult Create(Photo photo, HttpPostedFileBase image)
+        {
+            photo.CreatedDate = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                if (image != null)
+                {
+                    photo.ImageMimeType = image.ContentType;
+                    photo.PhotoFile = new byte[image.ContentLength];
+                    image.InputStream.Read(photo.PhotoFile, 0, image.ContentLength);
+                    context.Photos.Add(photo);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Create", photo);
+            }
+        }
+
+    }
+
+    public ActionResult Delete (int id)
+    {
+        List<Photo> photos = context.Photos.ToList();
+        var p = photos.Find(photo => photo.PhotoID == id);
+        if (p == null)
+        {
+            return HttpNotFound();
+        }
+        else
+        {
+            return View("Delete", p);
+        }
+    }
+    [HttpPost]
+    [ActionName Delete]
+    public ActionResult DeleteConfirmed(int id)
+    {
+        List<Photo> photos = context.Photos.ToList();
+        var p = photos.Find(photo => photo.PhotoID == id);
+        context.Entry(p).State = EntityState.Deleted;
+        context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+    public ActionResult GetImage(int id)
+    {
+
     }
 }
