@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PhotoSharingApp.Models;
+using System.Data;
+
 namespace PhotoSharingApp.Controllers
 {
     [ValueReporter]
@@ -15,7 +17,7 @@ namespace PhotoSharingApp.Controllers
         public ActionResult Index()
         {
 
-            return View("Index");
+            return View(context.Photos.ToList());
             //context.Photos.First<Photo>()
             // context.Photos.ToList()
         }
@@ -59,61 +61,61 @@ namespace PhotoSharingApp.Controllers
             }
         }
 
-    }
 
-    public ActionResult Delete (int id)
-    {
-        List<Photo> photos = context.Photos.ToList();
-        var p = photos.Find(photo => photo.PhotoID == id);
-        if (p == null)
-        {
-            return HttpNotFound();
-        }
-        else
-        {
-            return View("Delete", p);
-        }
-    }
-    [HttpPost]
-    [ActionName ("Delete")]
-    public ActionResult DeleteConfirmed (int id)
-    {
-        List<Photo> photos = context.Photos.ToList();
-        var p = photos.Find(photo => photo.PhotoID == id);
-        context.Entry(p).State = EntityState.Deleted;
-        context.SaveChanges();
-        return RedirectToAction("Index");
-    }
 
-    public FileContentResult GetImage (int id)
-    {
-        List<Photo> photos = context.Photos.ToList();
-        var verif = photos.Find(photo => photo.PhotoID == id);
-        if (verif != null)
+        public ActionResult Delete(int id)
         {
+            List<Photo> photos = context.Photos.ToList();
+            var p = photos.Find(photo => photo.PhotoID == id);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View("Delete", p);
+            }
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            List<Photo> photos = context.Photos.ToList();
+            var p = photos.Find(photo => photo.PhotoID == id);
+            context.Entry(p).State = EntityState.Deleted;
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-            return (new FileContentResult(verif.PhotoFile, verif.ImageMimeType));
-        }
-        else
+        public FileContentResult GetImage(int id)
         {
-            return null;
+            List<Photo> photos = context.Photos.ToList();
+            var verif = photos.Find(photo => photo.PhotoID == id);
+            if (verif != null)
+            {
+
+                return (new FileContentResult(verif.PhotoFile, verif.ImageMimeType));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        [ChildActionOnly]
+        public ActionResult _PhotoGallery(int number = 0)
+        {
+            List<Photo> photos = new List<Photo>();
+            if (number == 0)
+            {
+                photos = context.Photos.ToList();
+            }
+            else
+            {
+                photos = (from p in context.Photos
+                          orderby p.CreatedDate descending
+                          select p).Take(number).ToList();
+            }
+            return PartialView("_PhotoGallery", photos);
         }
     }
-    [ChildActionOnly]
-    public ActionResult _PhotoGallery(int number = 0)
-    {
-        List<Photo> photos = new List<Photo>();
-        if (number == 0)
-        {
-            photos = context.Photos.ToList();
-        }
-        else
-        {
-            photos = (from p in context.Photos
-                      orderby p.CreateDate descending
-                      select p).Take(number).ToList();
-        }
-        return PartialView("_PhotoGallery", photos);
-    }
-}
 }
