@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using PhotoSharingApp.Models;
 namespace PhotoSharingApp.Controllers
 {
+    
     public class PhotoController : Controller
     {
         private PhotoSharingContext context = new PhotoSharingContext();
@@ -74,8 +75,8 @@ namespace PhotoSharingApp.Controllers
         }
     }
     [HttpPost]
-    [ActionName Delete]
-    public ActionResult DeleteConfirmed(int id)
+    [ActionName ("Delete")]
+    public ActionResult DeleteConfirmed (int id)
     {
         List<Photo> photos = context.Photos.ToList();
         var p = photos.Find(photo => photo.PhotoID == id);
@@ -84,8 +85,35 @@ namespace PhotoSharingApp.Controllers
         return RedirectToAction("Index");
     }
 
-    public ActionResult GetImage(int id)
+    public FileContentResult GetImage (int id)
     {
+        List<Photo> photos = context.Photos.ToList();
+        var verif = photos.Find(photo => photo.PhotoID == id);
+        if (verif != null)
+        {
 
+            return (new FileContentResult(verif.PhotoFile, verif.ImageMimeType));
+        }
+        else
+        {
+            return null;
+        }
     }
+    [ChildActionOnly]
+    public ActionResult _PhotoGallery(int number = 0)
+    {
+        List<Photo> photos = new List<Photo>();
+        if (number == 0)
+        {
+            photos = context.Photos.ToList();
+        }
+        else
+        {
+            photos = (from p in context.Photos
+                      orderby p.CreateDate descending
+                      select p).Take(number).ToList();
+        }
+        return PartialView("_PhotoGallery", photos);
+    }
+}
 }
