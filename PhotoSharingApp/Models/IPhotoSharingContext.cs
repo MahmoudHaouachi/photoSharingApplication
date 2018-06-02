@@ -15,6 +15,7 @@ namespace PhotoSharingApp.Models
         T Add<T>(T entity) where T : class;
         Photo FindPhotoById(int ID);
         Comment FindCommentById(int ID);
+        Photo FindPhotoByTitle(string title);
         T Delete<T>(T entity) where T : class;
     }
 }
