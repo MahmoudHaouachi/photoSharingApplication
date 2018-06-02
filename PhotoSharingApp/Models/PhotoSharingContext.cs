@@ -42,7 +42,10 @@ namespace PhotoSharingApp.Models
 
         Photo IPhotoSharingContext.FindPhotoByTitle(string title)
         {
-            return Set<Photo>().Find(title);
+            List<Photo> photos = new List<Photo>();
+            photos = Photos.ToList();
+            Photo result = photos.Find(x => x.Title == title);
+            return result;
         }
 
         Comment IPhotoSharingContext.FindCommentById(int ID)
