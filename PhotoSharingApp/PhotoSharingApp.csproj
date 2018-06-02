@@ -117,6 +117,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\BackgroundGradient.jpg" />
+    <Content Include="Content\PhotoSharingStyle.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -143,7 +145,7 @@
     <Content Include="Views\Photo\Index.cshtml" />
     <Content Include="Views\Photo\Display.cshtml" />
     <Content Include="Views\Photo\Create.cshtml" />
-    <Content Include="Views\Photo\_PhotoGallery.cshtml" />
+    <Content Include="Views\Shared\_PhotoGallery.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Shared\_ViewStart.cshtml" />
