@@ -117,6 +117,14 @@ namespace PhotoSharingApp.Controllers
                 return null;
             }
         }
+
+
+        public ActionResult SlideShow()
+        {
+            return View("SlideShow", context.Photos.ToList());
+        }
+
+
         [ChildActionOnly]
         public ActionResult _PhotoGallery(int number = 0)
         {

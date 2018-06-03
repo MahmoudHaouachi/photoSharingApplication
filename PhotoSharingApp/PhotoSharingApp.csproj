@@ -125,6 +125,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Mvc.sitemap" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -152,6 +153,7 @@
     <Content Include="Views\Comment\Delete.cshtml" />
     <Content Include="Views\Shared\_CommentsForPhoto.cshtml" />
     <Content Include="Views\Shared\_CreateAComment.cshtml" />
+    <Content Include="Views\Photo\SlideShow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
